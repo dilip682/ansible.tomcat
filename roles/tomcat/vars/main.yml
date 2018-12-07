@@ -2,11 +2,13 @@
 nodes:
   node01:
     name: node01
+    base_dir: /home/tomcat/te
     http_port: 8080
     ajp_port: 8009
     shutdown_port: 8005
   node02:
     name: node02
+    base_dir: /home/tomcat/te
     http_port: 8090
     ajp_port: 8099
     shutdown_port: 8095

@@ -10,118 +10,118 @@
 
 - name: Create stage directory
   file:
-    path: {{ common.value.stage }}
+    path: /opt/stage
     state: directory
     mode: 0755
-  with_dict: "{{ common }}"
 
-- name : Download latest version of Apache Tomcat8
-  get_url:
-    url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.zip
-    dest: /home/tomcat/stage/
-    mode: 0440
+# - name : Download latest version of Apache Tomcat8
+#   get_url:
+#     url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.zip
+#     dest: /home/tomcat/stage/
+#     mode: 0440
 
 - name: Copy and unarchive the latest version of Apache Tomcat v8
   unarchive:
-    src: /home/tomcat/stage/apache-tomcat-8.5.35.zip
+    src: apache-tomcat-8.5.35.zip
     copy: yes
-    creates: {{ item.value.base_dir }}
-    dest: /home/tomcat
-    remote_src: yes
+    creates: /home/tomcat/te
+    dest: /home/tomcat/te
+    # remote_src: yes
 
 - name: Create tomcat8 instances directory
   file:
-    path: {{ item.value.base_dir }}/tomcat8/instances
+    path: /home/tomcat/te/tomcat8/instances
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
 - name: Create the required no. of node directories (tomcat instance root)
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
 - name: Create tomcat instance sub directory - bin
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/bin"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
 - name: Copy tomcat-juli.jar to bin
-  copy: src=bin/tomcat-juli.jar dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/bin" mode=0755
+  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
   with_dict: "{{ nodes }}"
 
+
 - name: Copy startup.sh script to bin
-  template: src=startup.j2 dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/bin/startup.sh" mode=0755
+  template: src=startup.j2 dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/startup.sh" mode=0755
   with_dict: "{{ nodes }}"
 
 - name: Copy shutdown.sh script to bin
-  template: src=shutdown.j2 dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/bin/shutdown.sh" mode=0755
+  template: src=shutdown.j2 dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/shutdown.sh" mode=0755
   with_dict: "{{ nodes }}"
 
 - name: Create tomcat instance sub directory - lib
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/lib"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/lib"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
 - name: Create tomcat instance sub directory - logs
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/logs"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/logs"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
 - name: Create tomcat instance sub directory - temp
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/temp"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/temp"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
 - name: Create tomcat instance sub directory - webapps
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/webapps"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/webapps"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
 - name: Copy all WARs to webapps
-  copy: src=webapps/ dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/webapps" mode=0755
+  copy: src=webapps/ dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/webapps" mode=0755
   with_dict: "{{ nodes }}"
   notify: restart tomcat
 
 - name: Create tomcat instance sub directory - conf
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/conf"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/conf"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
 
-- name: Copy all config. files to conf
-  copy: src=conf/ dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/conf"
+- name: Copy all config files to conf
+  copy: src=conf/ dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/conf"
   with_dict: "{{ nodes }}"
 
 - name: Create tomcat instance sub directory - conf/Catalina/host_name
   file:
-    path: "{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/conf/Catalina/{{ inventory_hostname }}"
+    path: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/conf/Catalina/{{ inventory_hostname }}"
     state: directory
   with_dict: "{{ nodes }}"
 
 - name: Copy manager.xml (Context) to conf/Catalina/host_name
-  copy: src=Catalina/manager.xml dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/conf/Catalina/{{ inventory_hostname }}"
+  copy: src=Catalina/manager.xml dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/conf/Catalina/{{ inventory_hostname }}"
   with_dict: "{{ nodes }}"
 
 - name: Copy tomcat-users.xml script to conf
-  template: src=tomcat-users.j2 dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/conf/tomcat-users.xml" mode=0755
+  template: src=tomcat-users.j2 dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/conf/tomcat-users.xml" mode=0755
   with_dict: "{{ nodes }}"
 
 - name: Copy server.xml script to conf
-  template: src=server.j2 dest="{{ item.value.base_dir }}/tomcat8/instances/{{ item.value.name }}/conf/server.xml" mode=0755
+  template: src=server.j2 dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/conf/server.xml" mode=0755
   with_dict: "{{ nodes }}"
   notify: restart tomcat
 

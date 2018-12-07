@@ -8,6 +8,12 @@
 - name: Add tomcat user
   user: name=tomcat group=tomcat home=/home/tomcat createhome=yes
 
+- name: Create stage directory
+  file:
+    path: /home/tomcat/stage
+    state: directory
+    mode: 0755
+
 - name : Download latest version of Apache Tomcat8
   get_url:
     url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.zip

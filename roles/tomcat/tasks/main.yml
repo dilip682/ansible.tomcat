@@ -8,9 +8,14 @@
 - name: Add tomcat user
   user: name=tomcat group=tomcat home=/home/tomcat createhome=yes
 
+- name : Download latest version of Apache Tomcat8
+  get_url:
+    url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.zip
+    dest: /home/tomcat/stage/
+    mode: 0440
 - name: Copy and unarchive the latest version of Apache Tomcat v8
   unarchive:
-    src: jws-application-servers-3.1.0-RHEL7-x86_64.zip
+    src: /home/tomcat/stage/apache-tomcat-8.5.35.zip
     copy: yes
     creates: /home/tomcat/jws-3.1
     dest: /home/tomcat

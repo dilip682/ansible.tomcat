@@ -22,11 +22,11 @@
 
 - name: Copy and unarchive the latest version of Apache Tomcat v8
   unarchive:
-    src: apache-tomcat-8.5.35.zip
+    src: /home/tomcat/stage/apache-tomcat-8.5.35.zip
     copy: yes
     creates: /home/tomcat/te
     dest: /home/tomcat/te
-    # remote_src: yes
+    remote_src: yes
 
 - name: Create tomcat8 instances directory
   file:

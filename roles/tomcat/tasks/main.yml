@@ -10,7 +10,7 @@
 
 - name: Create stage directory
   file:
-    path: /opt/tomcat/stage
+    path: /home/tomcat/stage
     state: directory
     mode: 0755
 

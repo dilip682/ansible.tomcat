@@ -59,7 +59,8 @@
   with_dict: "{{ nodes }}"
 
 - name: Copy tomcat-juli.jar to bin
-  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
+#  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
+  copy: src=/home/tomcat/te/apache-tomcat-8.5.35/bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
   with_dict: "{{ nodes }}"
 
 

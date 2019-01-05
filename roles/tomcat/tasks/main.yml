@@ -14,11 +14,11 @@
     state: directory
     mode: 0755
 
-# - name : Download latest version of Apache Tomcat8
-#   get_url:
-#     url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.zip
-#     dest: /home/tomcat/stage/
-#     mode: 0440
+- name : Download latest version of Apache Tomcat8
+  get_url:
+    url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.zip
+    dest: /home/tomcat/stage/
+    mode: 0440
 
 - name: Copy and unarchive the latest version of Apache Tomcat v8
   unarchive:

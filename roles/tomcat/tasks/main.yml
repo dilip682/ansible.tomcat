@@ -13,6 +13,12 @@
     path: /home/tomcat/stage
     state: directory
     mode: 0755
+    
+- name: Create Tomcat Base directory
+  file:
+    path: /home/tomcat/te
+    state: directory
+    mode: 0755
 
 - name : Download latest version of Apache Tomcat8
   get_url:
@@ -24,7 +30,7 @@
   unarchive:
     src: /home/tomcat/stage/apache-tomcat-8.5.35.zip
 #    copy: yes
-    creates: /home/tomcat/te
+#    creates: /home/tomcat/te
     dest: /home/tomcat/te
     remote_src: yes
 

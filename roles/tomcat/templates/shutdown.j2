@@ -1,7 +1,7 @@
 JAVA_HOME=/usr/lib/jvm/jre
-CATALINA_HOME=/home/tomcat/te/apache-tomcat-8.5.35
+CATALINA_HOME=/home/tomcat/te/apache-tomcat-8.5.37
 CATALINA_BASE=/home/tomcat/te/tomcat8/instances/{{ item.value.name }}
 export JAVA_HOME CATALINA_HOME CATALINA_BASE
-#/opt/jws-3.1/tomcat8/bin/shutdown.sh
+
 
 $CATALINA_HOME/bin/catalina.sh stop

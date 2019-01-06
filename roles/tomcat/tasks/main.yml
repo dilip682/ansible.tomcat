@@ -25,13 +25,13 @@
 
 - name : Download latest version of Apache Tomcat8
   get_url:
-    url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.zip
+    url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip
     dest: /home/tomcat/stage/
     mode: 0440
 
 - name: Copy and unarchive the latest version of Apache Tomcat v8
   unarchive:
-    src: /home/tomcat/stage/apache-tomcat-8.5.35.zip
+    src: /home/tomcat/stage/apache-tomcat-8.5.37.zip
 #    copy: yes
 #    creates: /home/tomcat/te
     dest: /home/tomcat/te
@@ -60,7 +60,7 @@
 
 - name: Copy tomcat-juli.jar to bin
 #  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
-  copy: src=/home/tomcat/te/apache-tomcat-8.5.35/bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
+  copy: src=/home/tomcat/te/apache-tomcat-8.5.37/bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
   with_dict: "{{ nodes }}"
 
 

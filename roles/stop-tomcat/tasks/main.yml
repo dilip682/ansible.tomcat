@@ -7,7 +7,7 @@
     executable: /bin/bash
   with_dict: "{{ nodes }}"
 
-- name: Delete the Tomcat/Catalina Home and all Base directories underneath
-  file:
-    path: /home/tomcat/te
-    state: absent
+#- name: Delete the Tomcat/Catalina Home and all Base directories underneath
+#  file:
+#    path: /home/tomcat/te
+#    state: absent

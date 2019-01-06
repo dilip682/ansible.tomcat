@@ -6,8 +6,12 @@
   args:
     executable: /bin/bash
   with_dict: "{{ nodes }}"
+  become: yes
+  become_user: tomcat
+  become_method: sudo
   register : result
 - debug: var=result
+
 
 #- name: Delete the Tomcat/Catalina Home and all Base directories underneath
 #  file:

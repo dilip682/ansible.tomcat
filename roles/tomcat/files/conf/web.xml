@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
@@ -232,8 +232,8 @@
   <!--   suppressSmap        Should the generation of SMAP info for JSR45   -->
   <!--                       debugging be suppressed?  [false]              -->
   <!--                                                                      -->
-  <!--   trimSpaces          Should white spaces in template text between   -->
-  <!--                       actions or directives be trimmed?  [false]     -->
+  <!--   trimSpaces          Should template text that consists entirely of -->
+  <!--                       whitespace be removed from the output? [false] -->
   <!--                                                                      -->
   <!--   xpoweredBy          Determines whether X-Powered-By response       -->
   <!--                       header is added by generated servlet.  [false] -->
@@ -242,9 +242,6 @@
   <!--                       attribute values, should the rules in JSP.1.6  -->
   <!--                       for the escaping of quote characters be        -->
   <!--                       strictly applied? [true]                       -->
-  <!--                       The default can be changed with the            -->
-  <!--                       org.apache.jasper.compiler.Parser.             -->
-  <!--                       STRICT_QUOTE_ESCAPING system property.         -->
   <!--                                                                      -->
   <!--   quoteAttributeEL    When EL is used in an attribute value on a     -->
   <!--                       JSP page should the rules for quoting of       -->
@@ -338,22 +335,10 @@
   <!--                        If not set, then webAppRootDir is used.       -->
   <!--                        Recommended value: WEB-INF/cgi                -->
   <!--                                                                      -->
-  <!--   debug                Debugging detail level for messages logged    -->
-  <!--                        by this servlet. Useful values range from 0   -->
-  <!--                        to 5 where 0 means no logging and 5 means     -->
-  <!--                        maximum logging. Values of 10 or more mean    -->
-  <!--                        maximum logging plus debug info added to the  -->
-  <!--                        HTTP response. If an error occurs and debug   -->
-  <!--                        is 10 or more the standard error page         -->
-  <!--                        mechanism will be disabled and a response     -->
-  <!--                        body with debug information will be produced. -->
-  <!--                        Note that any value of 10 or more has the     -->
-  <!--                        same effect as a value of 10. If set to 10 or -->
-  <!--                        more the standard error page mechanism will   -->
-  <!--                        be disabled and a debug page shown instead.   -->
-  <!--                        The debug page is not considered secure and   -->
-  <!--                        should not be enabled for production systems. -->
-  <!--                        [0]                                           -->
+  <!--   enableCmdLineArguments                                             -->
+  <!--                        Are command line parameters generated from    -->
+  <!--                        the query string as per section 4.4 of 3875   -->
+  <!--                        RFC? [true]                                   -->
   <!--                                                                      -->
   <!--   executable           Name of the executable used to run the        -->
   <!--                        script. [perl]                                -->
@@ -366,6 +351,15 @@
   <!--                        pattern.                                      -->
   <!--                        [ACCEPT[-0-9A-Z]*|CACHE-CONTROL|COOKIE|HOST|  -->
   <!--                         IF-[-0-9A-Z]*|REFERER|USER-AGENT]            -->
+  <!--                                                                      -->
+  <!--  environment-variable- An environment to be set for the execution    -->
+  <!--                        environment of the CGI script. The name of    -->
+  <!--                        variable is taken from the parameter name.    -->
+  <!--                        To configure an environment variable named    -->
+  <!--                        FOO, configure a parameter named              -->
+  <!--                        environment-variable-FOO. The parameter value -->
+  <!--                        is used as the environment variable value.    -->
+  <!--                        The default is no environment variables.      -->
   <!--                                                                      -->
   <!--   parameterEncoding    Name of parameter encoding to be used with    -->
   <!--                        CGI servlet.                                  -->
@@ -382,10 +376,6 @@
     <servlet>
         <servlet-name>cgi</servlet-name>
         <servlet-class>org.apache.catalina.servlets.CGIServlet</servlet-class>
-        <init-param>
-          <param-name>debug</param-name>
-          <param-value>0</param-value>
-        </init-param>
         <init-param>
           <param-name>cgiPathPrefix</param-name>
           <param-value>WEB-INF/cgi</param-value>
@@ -597,102 +587,6 @@
     </filter-mapping>
 -->
 
-<!-- The RHQ Response Time Metric Filter. -->
-<!-- This filter gathers response time information for processed requests -->
-<!-- for all hosted applications. This requires that the                  -->
-<!-- rhq-rtfilter-X.X.X.jar also be placed into ../lib. The jar           -->
-<!-- file can be downloaded from the RHQ Server. Using the GUI, navigate  -->
-<!-- to the Administration page. Then click 'Download Agent Connectors'.  -->
-<!-- Download connector-rtfilter.zip. Unzip to extract the jar.           -->
-<!-- For more information see the JBoss ON Feature Guide, Response Time   -->
-<!-- Filter section. http://www.redhat.com/docs/en-US/JBoss_ON            -->
-<!--                                                                      -->
-<!-- Optional parameters                                                  -->
-<!--                                                                      -->
-<!--   chopQueryString  Filter directly chops off the query parameters    -->
-<!--                    from the URL? Default is true.                    -->
-<!--                                                                      -->
-<!--   logDirectory     Directory to which the logs are written.          -->
-<!--                                                                      -->
-<!--   logFilePrefix    Prefix to written logfile names.                  -->
-<!--                                                                      -->
-<!--   dontLogRegEx     Patterns that should not be logged.               -->
-<!--                                                                      -->
-<!--   matchOnUriOnly   Apply the dontLog pattern to the URI only?        -->
-<!--                                                                      -->
-<!--   timeBetweenFlushesInSec                                            -->
-<!--                    Seconds between auto flushes of the logfile.      -->
-<!--   maxLogFileSize   The maximum allowed size, in bytes, of the        -->
-<!--                    logfiles if a logfile exceeds this limit, the     -->
-<!--                    filter will truncate it; the default value is     -->
-<!--                    5242880 (5 MB)                                    -->
-<!--   vHostMappingFile Name of vhost mapping file. This properties file  -->
-<!--                    must be in the Tomcat process classpath.          -->
-<!--                                                                      -->
-<!-- NOTE: When enabling, also uncomment the RhqRtFilter filter below.    -->
-<!-- NOTE: When enabling, uncomment the start and end tags.               --> 
-<!-- start tag (also uncomment end tag)                      
-   <filter>                                                  
-       <filter-name>RhqRtFilter</filter-name>                
-       <filter-class>org.rhq.helpers.rtfilter.filter.RtFilter</filter-class>
--->                                                          
-                                                             
-<!-- Optional parameters. Note these typically remain commented. Also,     
-     some of these values may be configurable on the relevant
-     RHQ Server resource, via the RHQ GUI.                   
-                                                             
-                                                             
-       <init-param>                                          
-           <param-name>chopQueryString</param-name>          
-           <param-value>true</param-value>                   
-       </init-param>                                         
-       <init-param>                                          
-           <param-name>logDirectory</param-name>             
-          <param-value>/tmp</param-value>                    
-      </init-param>                                         
-      <init-param>                                          
-          <param-name>logFilePrefix</param-name>            
-          <param-value>localhost_7080_</param-value>        
-      </init-param>                                         
-      <init-param>                                          
-           <param-name>dontLogRegEx</param-name>             
-           <param-value></param-value>                       
-       </init-param>                                         
-       <init-param>                                          
-          <param-name>matchOnUriOnly</param-name>            
-          <param-value>true</param-value>                    
-       </init-param>                                         
-       <init-param>                                          
-           <param-name>timeBetweenFlushesInSec</param-name>  
-           <param-value>73</param-value>                     
-       </init-param>                                         
-       <init-param>                                          
-           <param-name>flushAfterLines</param-name>          
-           <param-value>13</param-value>                     
-       </init-param>                                         
-       <init-param>                                          
-           <param-name>maxLogFileSize</param-name>           
-           <param-value>5242880</param-value>                
-       </init-param>                                         
--->             
-
-<!-- end tag (also uncomment start tag)                      
-    </filter>                                                
--->                                                          
-
-  <!-- The mapping for the RHQ Filter                                       -->
-  <!-- To limit to only certain applications various filters can be         -->
-  <!-- defined. This will perform RT metric collection for all              -->
-  <!-- applications.                                                        -->
-  <!--                                                                      -->
-  <!-- Note: Uncomment only when also enabling the RhqRtFilter above.       -->
-<!--                                                         
-   <filter-mapping>                                          
-       <filter-name>RhqRtFilter</filter-name>                
-       <url-pattern>/*</url-pattern>                         
-   </filter-mapping>                                         
--->                                                          
- 
 
   <!-- ==================== Default Session Configuration ================= -->
   <!-- You can set the default session timeout (in minutes) for all newly   -->
@@ -2995,7 +2889,7 @@
     </mime-mapping>
     <mime-mapping>
         <extension>otf</extension>
-        <mime-type>application/x-font-otf</mime-type>
+        <mime-type>font/otf</mime-type>
     </mime-mapping>
     <mime-mapping>
         <!-- OpenDocument Drawing Template -->
@@ -4034,11 +3928,11 @@
     </mime-mapping>
     <mime-mapping>
         <extension>ttc</extension>
-        <mime-type>application/x-font-ttf</mime-type>
+        <mime-type>font/collection</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>ttf</extension>
-        <mime-type>application/x-font-ttf</mime-type>
+        <mime-type>font/ttf</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>ttl</extension>
@@ -4427,7 +4321,11 @@
     </mime-mapping>
     <mime-mapping>
         <extension>woff</extension>
-        <mime-type>application/x-font-woff</mime-type>
+        <mime-type>font/woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff2</extension>
+        <mime-type>font/woff2</mime-type>
     </mime-mapping>
     <mime-mapping>
         <extension>wpd</extension>

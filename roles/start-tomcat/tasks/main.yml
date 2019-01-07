@@ -2,7 +2,7 @@
 # Stop all Apache Tomcat instances and delete the install directory.
 
 - name: Start all tomcat instances
-  command: "nohup startup.sh"
+  command: "nohup sh startup.sh"
   args:
     chdir: /home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/
 #  command: "/home/tomcat/te/tomcat8/instances/node01/bin/tomcat-initscript.sh start"

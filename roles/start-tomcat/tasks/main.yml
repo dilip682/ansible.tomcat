@@ -4,7 +4,7 @@
 - name: Start all tomcat instances
   command: nohup sh startup.sh
   args:
-    chdir: /home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/
+    chdir: {{catalina_base}}/instances/{{ item.value.name }}/bin/
 #  command: "/home/tomcat/te/tomcat8/instances/node01/bin/tomcat-initscript.sh start"
 #  shell: /home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/startup.sh
 #  args:

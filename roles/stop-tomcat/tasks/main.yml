@@ -2,7 +2,7 @@
 # Stop all Apache Tomcat instances and delete the install directory.
 
 - name: Stop all tomcat instances
-  shell: /home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/shutdown.sh
+  shell: {{catalina_base}}/instances/{{ item.value.name }}/bin/shutdown.sh
   args:
     executable: /bin/bash
   with_dict: "{{ nodes }}"

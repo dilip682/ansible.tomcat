@@ -10,11 +10,13 @@ admin_password: admin123
 # Catalina download URL
 catalina_download_url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip
 
+# Java configurations
+java_home: /usr/lib/jvm/jre
+
 # Catalina configurations
 catalina_install_base: /home/tomcat/ts
-java_home: /usr/lib/jvm/jre
-catalina_home: /home/tomcat/te/apache-tomcat-8.5.37
-catalina_base: /home/tomcat/te/tomcat8
+catalina_home: /home/tomcat/ts/apache-tomcat-8.5.37
+catalina_base: /home/tomcat/ts/tomcat8
 
 # Stage folder for temp downloads
 stage_folder: /home/tomcat/stage

@@ -13,11 +13,9 @@
 
 - name: Create stage directory
   file:
-    path: {{ item.path }}
+    path: '{{stage_folder}}'
     state: directory
     mode: 0755
-  with_items:
-    - {path: {{stage_folder}}}
 
 - name: Create Tomcat Base directory
   file:

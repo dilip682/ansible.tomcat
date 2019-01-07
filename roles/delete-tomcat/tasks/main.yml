@@ -6,6 +6,7 @@
   args:
     executable: /bin/bash
   with_dict: "{{ nodes }}"
+  ignore_errors: yes 
 
 - name: Delete the Tomcat/Catalina Home and all Base directories underneath
  file:

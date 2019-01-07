@@ -2,7 +2,7 @@
 # Stop all Apache Tomcat instances and delete the install directory.
 
 - name: Test Connection - Check Hostname
-  command: echo `hostname`
+  command: echo $HOSTNAME
 
 - name: Test Connection - List Environment Variables
   command: env

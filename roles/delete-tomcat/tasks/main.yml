@@ -9,6 +9,6 @@
   ignore_errors: yes
 
 - name: Delete the Tomcat/Catalina Home and all Base directories underneath
- file:
-   path: /home/tomcat/te
-   state: absent
+  file:
+    path: /home/tomcat/te
+    state: absent

@@ -2,11 +2,11 @@
 # Stop all Apache Tomcat instances and delete the install directory.
 
 - name: Start all tomcat instances
-#  command: "/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/startup.sh"
+  command: nohup /home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/startup.sh
 #  command: "/home/tomcat/te/tomcat8/instances/node01/bin/tomcat-initscript.sh start"
-  shell: /home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/startup.sh
-  args:
-    executable: /bin/bash
+#  shell: /home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin/startup.sh
+#  args:
+#    executable: /bin/bash
   with_dict: "{{ nodes }}"
   register : result
 - debug: var=result

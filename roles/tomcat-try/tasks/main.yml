@@ -1,15 +1,15 @@
 ---
-# - name: Install Java 1.8
-#   yum: name=java-1.8.0-openjdk state=present
-#
-# - name: Install unzip
-#   yum: name=unzip state=present
-#
-# - name: Add tomcat group
-#   group: name=tomcat
-#
-# - name: Add tomcat user
-#   user: name=tomcat group=tomcat home=/home/tomcat createhome=yes
+- name: Install Java 1.8
+  yum: name=java-1.8.0-openjdk state=present
+
+- name: Install unzip
+  yum: name=unzip state=present
+
+- name: Add tomcat group
+  group: name=tomcat
+
+- name: Add tomcat user
+  user: name=tomcat group=tomcat home=/home/tomcat createhome=yes
 
 - name: Create stage directory
   file:
@@ -29,14 +29,14 @@
 #     dest: "{{stage_folder}}"
 #     mode: 0440
 #
-# - name: Copy and unarchive the latest version of Apache Tomcat v8
-#   unarchive:
-#     src: "{{stage_folder}}/apache-tomcat-8.5.37.zip"
-# #    copy: yes
-# #    creates: /home/tomcat/te
-#     dest: "{{catalina_install_base}}"
-#     remote_src: yes
-#
+- name: Copy and unarchive the Apache Tomcat
+  unarchive:
+    src: "/opt/stage-temp/apache-tomcat-8.5.37.zip"
+#    copy: yes
+    creates: "{{catalina_install_base}}"
+    dest: "{{catalina_install_base}}"
+    remote_src: yes
+
 
 - name: Create tomcat8 instances directory
   file:

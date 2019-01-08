@@ -14,12 +14,12 @@ catalina_download_url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.
 java_home: /usr/lib/jvm/jre
 
 # Catalina configurations
-catalina_install_base: /home/tomcat/ts
-catalina_home: /home/tomcat/ts/apache-tomcat-8.5.37
-catalina_base: /home/tomcat/ts/tomcat8
+catalina_install_base: /opt/localapps/ts
+catalina_home: {{catalina_install_base}}/apache-tomcat-home
+catalina_base: {{catalina_install_base}}/tomcat_base
 
 # Stage folder for temp downloads
-stage_folder: /home/tomcat/stage
+stage_folder: /opt/localapps/stage
 
 # Tomcat nodes to be created
 nodes:

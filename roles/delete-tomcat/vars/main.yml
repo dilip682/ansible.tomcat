@@ -1,5 +1,5 @@
 ---
-delete_catalina_version: 
+delete_catalina_version:
 # nodes:
 #   tsnode01:
 #     name: tsnode01

@@ -19,27 +19,27 @@
 
 - name: Create Tomcat Base directory
   file:
-    path: {{catalina_install_base}}
+    path: "{{catalina_install_base}}"
     state: directory
     mode: 0755
 
 - name : Download latest version of Apache Tomcat8
   get_url:
-    url: {{catalina_download_url}}
-    dest: {{stage_folder}}
+    url: "{{catalina_download_url}}"
+    dest: "{{stage_folder}}"
     mode: 0440
 
 - name: Copy and unarchive the latest version of Apache Tomcat v8
   unarchive:
-    src: {{stage_folder}}/apache-tomcat-8.5.37.zip
+    src: "{{stage_folder}}/apache-tomcat-8.5.37.zip"
 #    copy: yes
 #    creates: /home/tomcat/te
-    dest: {{catalina_install_base}}
+    dest: "{{catalina_install_base}}"
     remote_src: yes
 
 - name: Create tomcat8 instances directory
   file:
-    path: {{catalina_base}}/instances
+    path: "{{catalina_base}}/instances"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
@@ -60,7 +60,7 @@
 
 - name: Copy tomcat-juli.jar to bin
 #  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
-  copy: src={{catalina_home}}/bin/tomcat-juli.jar dest="{{catalina_base}}/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
+  copy: src="{{catalina_home}}/bin/tomcat-juli.jar" dest="{{catalina_base}}/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
   with_dict: "{{ nodes }}"
 
 

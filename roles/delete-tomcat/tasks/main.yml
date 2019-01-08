@@ -14,6 +14,6 @@
     state: absent
   with_items:
     - "{{catalina_base}}/instances"
-    - "{{catalina_base}}/apache-tomcat-{{catalina_version}}"
+    - "{{catalina_base}}/apache-tomcat-{{delete_catalina_version}}"
   tags:
     - deleteBaseInstances

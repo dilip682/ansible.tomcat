@@ -17,4 +17,5 @@
   roles:
 #    - selinux
     - backup-tomcat
-    - tomcat-try
+    - delete-Tomcat
+    - tomcat

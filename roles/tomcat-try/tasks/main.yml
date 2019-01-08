@@ -30,22 +30,23 @@
 #     mode: 0440
 #
 
-# - name: Copy and unarchive the Apache Tomcat
-#   unarchive:
-#     src: "/opt/stage-temp/apache-tomcat-8.5.37.zip"
-# #    copy: yes
-#     # creates: "{{catalina_install_base}}"
-#     dest: "{{catalina_base}}"
-#     remote_src: yes
+- name: Copy and unarchive the Apache Tomcat
+  unarchive:
+    # src: "{{catalina_download_url}}"
+    src: "{{catalina_download_src}}"
+    copy: yes
+    # creates: "{{catalina_install_base}}"
+    dest: "{{catalina_base}}"
+    # remote_src: yes
 
-- name: stat of zip files
-  stat: path="{{catalina_base}}/apache-tomcat-*"
-  register: folder_stat
-- debug: var=folder_stat
+# - name: stat of zip files
+#   stat: path="{{catalina_base}}/apache-tomcat-*"
+#   register: folder_stat
+# - debug: var=folder_stat
 
 - name: Rename tomcat Binary Home
   command: mv "{{catalina_base}}/tomcat/apache-tomcat-*" "{{catalina_home}}"
-  when: folder_stat.stat.exists
+  # when: folder_stat.stat.exists
 
 
 - name: Create tomcat8 instances directory
@@ -68,21 +69,21 @@
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
-#
-# - name: Copy tomcat-juli.jar to bin
-# #  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
-#   copy: src="{{catalina_home}}/bin/tomcat-juli.jar" dest="{{catalina_base}}/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
-#   with_dict: "{{ nodes }}"
-#
-#
-# - name: Copy startup.sh script to bin
-#   template: src=startup.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/bin/startup.sh" mode=0755
-#   with_dict: "{{ nodes }}"
-#
-# - name: Copy shutdown.sh script to bin
-#   template: src=shutdown.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/bin/shutdown.sh" mode=0755
-#   with_dict: "{{ nodes }}"
-#
+
+- name: Copy tomcat-juli.jar to bin
+#  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
+  copy: src="{{catalina_home}}/bin/tomcat-juli.jar" dest="{{catalina_base}}/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
+  with_dict: "{{ nodes }}"
+
+
+- name: Copy startup.sh script to bin
+  template: src=startup.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/bin/startup.sh" mode=0755
+  with_dict: "{{ nodes }}"
+
+- name: Copy shutdown.sh script to bin
+  template: src=shutdown.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/bin/shutdown.sh" mode=0755
+  with_dict: "{{ nodes }}"
+
 - name: Create tomcat instance sub directory - lib
   file:
     path: "{{catalina_base}}/instances/{{ item.value.name }}/lib"
@@ -110,42 +111,42 @@
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
-#
-# - name: Copy all WARs to webapps
-#   copy: src=webapps/ dest="{{catalina_base}}/instances/{{ item.value.name }}/webapps" mode=0755
-#   with_dict: "{{ nodes }}"
-#   notify: restart tomcat
-#
+
+- name: Copy all WARs to webapps
+  copy: src=webapps/ dest="{{catalina_base}}/instances/{{ item.value.name }}/webapps" mode=0755
+  with_dict: "{{ nodes }}"
+  notify: restart tomcat
+
 - name: Create tomcat instance sub directory - conf
   file:
     path: "{{catalina_base}}/instances/{{ item.value.name }}/conf"
     state: directory
     mode: 0755
   with_dict: "{{ nodes }}"
-#
-# - name: Copy all config files to conf
-#   copy: src=conf/ dest="{{catalina_base}}/instances/{{ item.value.name }}/conf"
-#   with_dict: "{{ nodes }}"
-#
+
+- name: Copy all config files to conf
+  copy: src=conf/ dest="{{catalina_base}}/instances/{{ item.value.name }}/conf"
+  with_dict: "{{ nodes }}"
+
 - name: Create tomcat instance sub directory - conf/Catalina/host_name
   file:
     path: "{{catalina_base}}/instances/{{ item.value.name }}/conf/Catalina/{{ inventory_hostname }}"
     state: directory
   with_dict: "{{ nodes }}"
-#
-# - name: Copy manager.xml (Context) to conf/Catalina/host_name
-#   copy: src=Catalina/manager.xml dest="{{catalina_base}}/instances/{{ item.value.name }}/conf/Catalina/{{ inventory_hostname }}"
-#   with_dict: "{{ nodes }}"
-#
-# - name: Copy tomcat-users.xml script to conf
-#   template: src=tomcat-users.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/conf/tomcat-users.xml" mode=0755
-#   with_dict: "{{ nodes }}"
-#
-# - name: Copy server.xml script to conf
-#   template: src=server.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/conf/server.xml" mode=0755
-#   with_dict: "{{ nodes }}"
-#   notify: restart tomcat
-#
+
+- name: Copy manager.xml (Context) to conf/Catalina/host_name
+  copy: src=Catalina/manager.xml dest="{{catalina_base}}/instances/{{ item.value.name }}/conf/Catalina/{{ inventory_hostname }}"
+  with_dict: "{{ nodes }}"
+
+- name: Copy tomcat-users.xml script to conf
+  template: src=tomcat-users.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/conf/tomcat-users.xml" mode=0755
+  with_dict: "{{ nodes }}"
+
+- name: Copy server.xml script to conf
+  template: src=server.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/conf/server.xml" mode=0755
+  with_dict: "{{ nodes }}"
+  notify: restart tomcat
+
 - name: Change owner [tomcat:tomcat] and permissions [0755] of Tomcat Home
   file:
     path: "{{catalina_install_base}}"

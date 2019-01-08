@@ -8,7 +8,10 @@ admin_username: admin
 admin_password: admin123
 
 # Catalina download URL
-catalina_download_url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip
+# catalina_download_url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip
+catalina_download_url: /opt/stage/tomcat-binary/apache-tomcat-8.5.37.zip
+catalina_version: apache-tomcat-8.5.37
+catalina_download_src: "/opt/stage/tomcat-binary/{{catalina_version}}.zip"
 
 # Java configurations
 java_home: /usr/lib/jvm/jre

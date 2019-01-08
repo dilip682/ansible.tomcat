@@ -18,4 +18,4 @@
 #    - selinux
     - backup-tomcat
     - delete-Tomcat
-    - tomcat
+    - tomcat-try

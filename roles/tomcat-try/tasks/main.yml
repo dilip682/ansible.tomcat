@@ -45,7 +45,7 @@
 # - debug: var=folder_stat
 
 - name: Rename tomcat Binary Home
-  command: mv "{{catalina_base}}/tomcat/apache-tomcat-*" "{{catalina_home}}"
+  command: mv "{{catalina_base}}/apache-tomcat-*" "{{catalina_home}}"
   # when: folder_stat.stat.exists
 
 

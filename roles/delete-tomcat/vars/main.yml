@@ -1,4 +1,5 @@
 ---
+backup_catalina_version: 8.5.37
 # nodes:
 #   tsnode01:
 #     name: tsnode01

@@ -1,14 +1,14 @@
 ---
 nodes:
   tsnode01:
-    name: tsnode01
-    base_dir: "{{catalina_install_base}}"
+    name: node01
+    base_dir: {{catalina_install_base}}
     http_port: 8080
     ajp_port: 8009
     shutdown_port: 8005
   tsnode02:
-    name: tsnode02
-    base_dir: "{{catalina_install_base}}"
+    name: node02
+    base_dir: {{catalina_install_base}}
     http_port: 8090
     ajp_port: 8099
     shutdown_port: 8095

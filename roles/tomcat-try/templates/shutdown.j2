@@ -1,0 +1,7 @@
+JAVA_HOME={{java_home}}
+CATALINA_HOME={{catalina_home}}
+CATALINA_BASE={{catalina_base}}/instances/{{ item.value.name }}
+export JAVA_HOME CATALINA_HOME CATALINA_BASE
+
+
+$CATALINA_HOME/bin/catalina.sh stop

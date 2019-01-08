@@ -20,3 +20,18 @@ catalina_base: /home/tomcat/ts/tomcat8
 
 # Stage folder for temp downloads
 stage_folder: /home/tomcat/stage
+
+# Tomcat nodes to be created
+nodes:
+  tsnode01:
+    name: tsnode01
+    base_dir: "{{catalina_install_base}}"
+    http_port: 8080
+    ajp_port: 8009
+    shutdown_port: 8005
+  tsnode02:
+    name: tsnode02
+    base_dir: "{{catalina_install_base}}"
+    http_port: 8090
+    ajp_port: 8099
+    shutdown_port: 8095

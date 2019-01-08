@@ -21,7 +21,7 @@
     dest: "{{catalina_base}}/Archive/backup-apache-tomcat-{{backup_catalina_version}}-{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M-%S')}}.zip"
     format: zip
 
-- name: Backup catalina version {{backup_catalina_version:}} - instances
+- name: Backup catalina version {{backup_catalina_version}} - instances
   archive:
     path: "{{catalina_base}}/instances"
     dest: "{{catalina_base}}/Archive/backup-instances-{{backup_catalina_version}}-{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M-%S')}}.zip"

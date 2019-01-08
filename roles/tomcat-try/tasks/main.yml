@@ -39,12 +39,13 @@
 #     remote_src: yes
 
 - name: stat of zip files
-  stat: path="/opt/stage-temp/apache-tomcat-8.5.37.zip"
-  register: zip_stat
-- debug: var=zip_stat
+  stat: path="{{catalina_base}}/tomcat/apache-tomcat-*"
+  register: folder_stat
+- debug: var=folder_stat
 
-# - name: Rename tomcat Binary Home
-#   command: mv /path/to/foo /path/to/bar
+- name: Rename tomcat Binary Home
+  command: mv "{{catalina_base}}/tomcat/apache-tomcat-*" "{{catalina_home}}"
+  when: folder_stat.stat.exists
 
 
 - name: Create tomcat8 instances directory

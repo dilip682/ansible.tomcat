@@ -15,8 +15,8 @@ java_home: /usr/lib/jvm/jre
 
 # Catalina configurations
 catalina_install_base: /opt/localapps/ts
-catalina_home: "{{catalina_install_base}}/apache-tomcat-home"
-catalina_base: "{{catalina_install_base}}/tomcat_base"
+catalina_home: "{{catalina_install_base}}/tomcat/apache-tomcat-binary"
+catalina_base: "{{catalina_install_base}}/tomcat"
 
 # Stage folder for temp downloads
 stage_folder: /opt/localapps/stage

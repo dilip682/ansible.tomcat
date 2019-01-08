@@ -1,9 +1,0 @@
-JAVA_HOME={{java_home}}
-CATALINA_HOME={{catalina_home}}
-CATALINA_BASE={{catalina_base}}/instances/{{ item.value.name }}
-CATALINA_OPTS="-Xms256m -Xmx512m"
-JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true"
-CATALINA_PID="${CATALINA_BASE}/tomcat.pid"
-export JAVA_HOME JAVA_OPTS CATALINA_HOME CATALINA_BASE CATALINA_OPTS CATALINA_PID
-
-nohup $CATALINA_HOME/bin/catalina.sh start

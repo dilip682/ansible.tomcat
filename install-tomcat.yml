@@ -16,4 +16,4 @@
 
   roles:
 #    - selinux
-    - tomcat-try
+    - install-tomcat

@@ -10,6 +10,11 @@
 #    - selinux
 #    - apacheHttpd
 
+# parameters
+# catalina_version: 8.5.37
+# backup_catalina_version: 8.5.35
+# delete_catalina_version: 8.5.35
+
 - hosts: tomcat-servers
   become: yes
   become_method: sudo
@@ -17,5 +22,5 @@
   roles:
 #    - selinux
     - backup-tomcat
-    - delete-Tomcat
+    - delete-tomcat
     - tomcat-try

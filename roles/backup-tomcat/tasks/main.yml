@@ -1,5 +1,6 @@
 ---
 # Stop all Apache Tomcat instances, backup and delete the install directory.
+# parameters catalina_version: 8.5.37
 
 - name: Stop all tomcat instances
   shell: "{{catalina_base}}/instances/{{ item.value.name }}/bin/shutdown.sh"

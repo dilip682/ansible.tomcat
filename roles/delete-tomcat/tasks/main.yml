@@ -1,12 +1,18 @@
 ---
 # Stop all Apache Tomcat instances and delete the install directory.
 
-- name: Stop all tomcat instances
-  shell: "{{catalina_base}}/instances/{{ item.value.name }}/bin/shutdown.sh"
-  args:
-    executable: /bin/bash
-  with_dict: "{{ nodes }}"
-  ignore_errors: yes
+# - name: Stop all tomcat instances
+#   shell: "{{catalina_base}}/instances/{{ item.value.name }}/bin/shutdown.sh"
+#   args:
+#     executable: /bin/bash
+#   with_dict: "{{ nodes }}"
+#   ignore_errors: yes
+
+- name: Backup instances @ stage folder
+  archive:
+    path: "{{catalina_install_base}}"
+    dest: "{{stage_folder}}/{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M-%S')}}.zip"
+    format: zip
 
 - name: Delete the Tomcat/Catalina Home and all Base directories underneath
   file:

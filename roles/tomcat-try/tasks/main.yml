@@ -28,7 +28,7 @@
     path: "{{catalina_base}}"
     state: directory
     mode: 0755
-# - name : Download latest version of Apache Tomcat8
+# - name : Download latest version of Apache Tomcat
 #   get_url:
 #     url: "{{catalina_download_url}}"
 #     dest: "{{stage_folder}}"
@@ -76,7 +76,6 @@
   with_dict: "{{ nodes }}"
 
 - name: Copy tomcat-juli.jar to bin
-#  copy: src=bin/tomcat-juli.jar dest="/home/tomcat/te/tomcat8/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
   copy: src="{{catalina_home}}/bin/tomcat-juli.jar" dest="{{catalina_base}}/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
   with_dict: "{{ nodes }}"
 

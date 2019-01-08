@@ -23,6 +23,11 @@
     state: directory
     mode: 0755
 
+- name: Create Tomcat Catalina Base directory
+  file:
+    path: "{{catalina_base}}"
+    state: directory
+    mode: 0755
 # - name : Download latest version of Apache Tomcat8
 #   get_url:
 #     url: "{{catalina_download_url}}"
@@ -35,7 +40,7 @@
     # src: "{{catalina_download_url}}"
     src: "{{catalina_download_src}}"
     copy: yes
-    creates: "{{catalina_base}}"
+    # creates: "{{catalina_base}}"
     dest: "{{catalina_base}}"
     # remote_src: yes
 

@@ -1,23 +1,24 @@
 # Variables declaration file for Apache Tomcat servers
-# UDP Advertisement port where Apache httpd web server publishes it's AJP communication port no.
-apache_adv_port: 23364
-
 # Admin user/pwd for Tomcat default manager-gui user:
+
+# INPUT REQUIRED...
 
 admin_username: admin
 admin_password: admin123
+catalina_version: 8.5.37
+catalina_install_base: /opt/localapps/ts
+catalina_download_url: /opt/stage/tomcat-binary/apache-tomcat-8.5.37.zip
+# catalina_download_url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip
+
+# INPUT NOT REQUIRED...
 
 # Catalina download URL
-# catalina_download_url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.zip
-catalina_download_url: /opt/stage/tomcat-binary/apache-tomcat-8.5.37.zip
-catalina_version: 8.5.37
 catalina_download_src: "/opt/stage/tomcat-binary/apache-tomcat-{{catalina_version}}.zip"
 
 # Java configurations
 java_home: /usr/lib/jvm/jre
 
 # Catalina configurations
-catalina_install_base: /opt/localapps/ts
 catalina_home: "{{catalina_install_base}}/tomcat/apache-tomcat-{{catalina_version}}"
 catalina_base: "{{catalina_install_base}}/tomcat"
 

@@ -44,9 +44,9 @@
 #   register: folder_stat
 # - debug: var=folder_stat
 
-- name: Rename tomcat Binary Home
-  command: mv "{{catalina_base}}/apache-tomcat-*" "{{catalina_home}}"
-  # when: folder_stat.stat.exists
+# - name: Rename tomcat Binary Home
+#   command: mv "{{catalina_base}}/apache-tomcat-{{catalina_version}}" "{{catalina_home}}"
+#   # when: folder_stat.stat.exists
 
 
 - name: Create tomcat8 instances directory

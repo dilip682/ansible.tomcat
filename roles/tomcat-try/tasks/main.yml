@@ -39,7 +39,7 @@
 #     remote_src: yes
 
 - name: stat of zip files
-  stat: path="{{catalina_base}}/tomcat/apache-tomcat-*"
+  stat: path="{{catalina_base}}/apache-tomcat-*"
   register: folder_stat
 - debug: var=folder_stat
 

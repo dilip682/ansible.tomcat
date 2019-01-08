@@ -29,13 +29,22 @@
 #     dest: "{{stage_folder}}"
 #     mode: 0440
 #
-- name: Copy and unarchive the Apache Tomcat
-  unarchive:
-    src: "/opt/stage-temp/apache-tomcat-8.5.37.zip"
-#    copy: yes
-    # creates: "{{catalina_install_base}}"
-    dest: "{{catalina_base}}"
-    remote_src: yes
+
+# - name: Copy and unarchive the Apache Tomcat
+#   unarchive:
+#     src: "/opt/stage-temp/apache-tomcat-8.5.37.zip"
+# #    copy: yes
+#     # creates: "{{catalina_install_base}}"
+#     dest: "{{catalina_base}}"
+#     remote_src: yes
+
+- name: stat of zip files
+  stat: path="/opt/stage-temp/apache-tomcat-8.5.37.zip"
+  register: zip_stat
+- debug: var=zip_stat
+
+# - name: Rename tomcat Binary Home
+#   command: mv /path/to/foo /path/to/bar
 
 
 - name: Create tomcat8 instances directory

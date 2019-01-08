@@ -35,7 +35,7 @@
     # src: "{{catalina_download_url}}"
     src: "{{catalina_download_src}}"
     copy: yes
-    # creates: "{{catalina_install_base}}"
+    creates: "{{catalina_base}}"
     dest: "{{catalina_base}}"
     # remote_src: yes
 

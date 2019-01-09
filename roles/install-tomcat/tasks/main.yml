@@ -79,7 +79,6 @@
   copy: src="{{catalina_home}}/bin/tomcat-juli.jar" dest="{{catalina_base}}/instances/{{ item.value.name }}/bin" mode=0755 remote_src=yes
   with_dict: "{{ nodes }}"
 
-
 - name: Copy startup.sh script to bin
   template: src=startup.j2 dest="{{catalina_base}}/instances/{{ item.value.name }}/bin/startup.sh" mode=0755
   with_dict: "{{ nodes }}"
